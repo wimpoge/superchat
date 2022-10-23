@@ -3,13 +3,13 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 
 import "./App.css";
-import logo from './logo.svg'
+import logo from "./logo.svg";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useRef, useState } from "react";
 
 firebase.initializeApp({
-//  config
+  //  config
 });
 
 const auth = firebase.auth();
@@ -22,7 +22,7 @@ function App() {
       <header>
         <SignOut />
       </header>
-        <section>{user ? <ChatRoom /> : <SignIn />}</section>
+      <section>{user ? <ChatRoom /> : <SignIn />}</section>
     </div>
   );
 }
@@ -47,7 +47,7 @@ function ChatRoom() {
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
 
-  const dummy = useRef()
+  const dummy = useRef();
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -62,16 +62,14 @@ function ChatRoom() {
 
     setFormValue("");
 
-    dummy.current.scrollIntoView({ behavior: 'smooth'})
+    dummy.current.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <>
       <main>
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-          <div ref={dummy}>
-
-          </div>
+        <div ref={dummy}></div>
       </main>
 
       <form onSubmit={sendMessage}>
@@ -91,7 +89,7 @@ function ChatMessage(props) {
 
   return (
     <div className={`message ${messageClass}`}>
-      <img src={ logo} alt="gambar"/>
+      <img src={logo} alt="gambar" />
       <p>{text}</p>
     </div>
   );
